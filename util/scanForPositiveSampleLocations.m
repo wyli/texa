@@ -18,7 +18,6 @@ for i = 1:size(frameInx,1);
 
     if (frameInx(i) - window3d(3) < 1) ||...
             (frameInx(i) + window3d(3) > sizeOfImg(3))
-
         continue;
     end
 
@@ -28,6 +27,7 @@ for i = 1:size(frameInx,1);
     xHigh = min(max(xs), sizeOfImg(1)-window3d(1));
     yLow = max(min(ys), window3d(2)+1);
     yHigh = min(max(ys), sizeOfImg(2)-window3d(2));
+
     for x = xLow:step(1):xHigh
         for y = yLow:step(2):yHigh
             try
@@ -47,23 +47,22 @@ end
 
 if isempty(locations)
     err = MException('OPT:nolocation',...
-        'Cannot find any continuous annotations');
+        'Cannot find any continuous annotations given the window size.');
     throw(err);
 end
 end % end of function
 
 % visualise ROI
-% figure;
-% colormap(gray);
-% imagesc(image3d(:,:,frameInx(5)));
-% for i = 1:1000
-% l = locations(i,:);
-% if l(3) == frameInx(5)
-% rectangle('Position',...
-%    [l(2)-window3d(2), l(1)-window3d(1),window3d(2)*2, window3d(1)*2],'FaceColor', 'r');
-% end
-% end
-%
-% clear i overlap;
+%figure;
+%colormap(gray);
+%imagesc(image3d(:,:,frameInx(10)));
+%for i = 1:size(locations, 1)
+%    l = locations(i,:);
+%    if (l(3) == frameInx(10))
+%        rectangle('Position',...
+%           [l(2)-window3d(2), l(1)-window3d(1),window3d(2)*2, window3d(1)*2],'FaceColor', 'r');
+%    end
 %end
 %
+%clear i overlap;
+%end
