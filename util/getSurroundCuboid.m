@@ -14,11 +14,9 @@ iStart = uint16(point3d - sizeOfCuboid); % starting index of x y z
 iEnd = uint16(point3d + sizeOfCuboid); % ending index of x y z:w
 
 try
-
     cuboid = uint8(image3d(...
         iStart(1):iEnd(1), iStart(2):iEnd(2), iStart(3):iEnd(3)));
 catch error
-
     warning('OPT:rejectLocation', error.identifier);
     fprintf('%d %d %d\n', point3d(1), point3d(2), point3d(3));
     cuboid = [];

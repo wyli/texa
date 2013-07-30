@@ -9,7 +9,6 @@ fprintf('%s build histogram for each cuboid\n', datestr(now));
 % input
 clusterSet = [baseSet, '/clusters.mat'];
 % output
-mkdir(feaSet);
 feaSet = [feaSet '/%s'];
 
 % dense sampling grid
@@ -22,11 +21,11 @@ z = z(:);
 
 tempclusters = load(clusterSet);
 clusters = tempclusters.clusters;
-listFiles = dir(sprintf(cuboidSet, windowSize, '*.mat'));
+listFiles = dir(sprintf(cuboidSet, '*.mat'));
 for i = 1:size(listFiles, 1)
     fprintf('%s extracting BoW features %s\n', datestr(now), listFiles(i).name);
 
-    cuboidFile = sprintf(cuboidSet, windowSize, listFiles(i).name);
+    cuboidFile = sprintf(cuboidSet, listFiles(i).name);
     temp = load(cuboidFile);
     cuboid = temp.cuboid;
 
@@ -66,6 +65,7 @@ function histogram = cuboid2Hist(image3d, clusters, x, y, z, wSize)
 %function histogram = cuboid2Hist(image3d, clusters)
 %function histogram = cuboid2Hist(localCuboid, clusters)
 global projMat
+
 %imgSize = size(image3d);
 %halfSize = ceil(wSize/2);
 %xs = halfSize:wStep:(imgSize(1) - halfSize);
@@ -80,13 +80,13 @@ global projMat
 % x = x(:);
 % y = y(:);
 % z = z(:);
+
 localCuboid = zeros(length(x), wSize^3); % assumming cube
 for i = 1:size(localCuboid, 1)
     sampleCell = getSurroundCuboid(...
         image3d, [x(i), y(i), z(i)], [wSize, wSize, wSize]);
     localCuboid(i, :) = sampleCell(:)';
 end
-%localCuboid = (projMat*localCuboid')';
 localCuboid = localCuboid*projMat';
 D = dist2(localCuboid, clusters);
 [~, nearest] = min(D, [], 2);

@@ -5,7 +5,7 @@ addpath(genpath('U:/github/texa')); %.git folder slow
 windowSize = 11;
 subWindow = 5;
 subStep = 2;
-randFeatureLength = 30;
+randFeatureLength = 40;
 
 %%% output directory
 id = '';
@@ -27,7 +27,7 @@ xmlSet = 'C:/OPT_dataset/Description';
 %%% flags
 generate_scheme = 1;
 new_random_matrix = 1;
-do_kmeans = zeros(10, 1);
+do_kmeans = ones(10, 1);
 do_extract_features = 1;
 do_classification = 0;
 fprintf('at: %s\n', datestr(now));
@@ -59,7 +59,7 @@ end
 L_ind = L_ind(randperm(size(L_ind, 2)));
 H_ind = H_ind(randperm(size(H_ind, 2)));
 C_ind = C_ind(randperm(size(C_ind, 2)));
-allInd = zeros(1, 90);
+allInd = zeros(1, k*foldSize);
 allInd(1, 1:3:end) = L_ind;
 allInd(1, 2:3:end) = H_ind;
 allInd(1, 3:3:end) = C_ind;
@@ -97,7 +97,7 @@ for f = 1:length(testScheme)
     if do_kmeans(f)
 
         kcenters = 200;
-        samplePerFile = 1;
+        samplePerFile = 100;
 
         temp = load([out_dir, '/randMat']);
         randMat = temp.randMat;
@@ -115,7 +115,7 @@ for f = 1:length(testScheme)
         clear temp;
 
         mkdir([resultSet, '/fea']);
-        cuboidInput = [patchSet, '/'];
+        cuboidInput = [patchSet, '/%s'];
         feaOutput = [resultSet, '/fea'];
         %samplePerFile = 50;
         extractFeatures(...
