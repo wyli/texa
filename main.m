@@ -1,5 +1,5 @@
 clear all; close all;
-%RandStream.setDefaultStream(RandStream('mrg32k3a', 'seed', sum(100*clock)));
+RandStream.setGlobalStream(RandStream('mt19937ar', 'Seed', 'shuffle'));
 addpath(genpath('U:/github/texa')); %.git folder slow
 
 windowSize = 11;
@@ -11,7 +11,7 @@ randFeatureLength = 40;
 id = '';
 if isempty(id)
     id = datestr(now, 30);
-    id = sprintf('RP_%s', id);
+    id = sprintf('%s', id);
 end
 out_dir = 'F:/experiments/randomfeatures';
 out_dir = sprintf('%s/%s_%02d_%02d', out_dir, id, windowSize, subWindow);
@@ -123,11 +123,8 @@ for f = 1:length(testScheme)
             windowSize, subWindow, subStep, randMat);
     end
 
-    diary off; return;
-
     if do_classification
         % classify features
     end
 end
-
 diary off;

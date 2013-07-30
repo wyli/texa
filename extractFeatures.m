@@ -23,7 +23,7 @@ tempclusters = load(clusterSet);
 clusters = tempclusters.clusters;
 listFiles = dir(sprintf(cuboidSet, '*.mat'));
 for i = 1:size(listFiles, 1)
-    fprintf('%s extracting BoW features %s\n', datestr(now), listFiles(i).name);
+    fprintf('%s **** %s\n', datestr(now), listFiles(i).name);
 
     cuboidFile = sprintf(cuboidSet, listFiles(i).name);
     temp = load(cuboidFile);
