@@ -1,11 +1,13 @@
-clear all; close all;
+function main(windowSize, subWindow, subStep, randFeatureLength)
+%clear all; close all;
 RandStream.setGlobalStream(RandStream('mt19937ar', 'Seed', 'shuffle'));
 addpath(genpath('U:/github/texa')); %.git folder slow
 
-windowSize = 11;
-subWindow = 5;
-subStep = 2;
-randFeatureLength = 40;
+%%% free parameters
+%windowSize = 11;
+%subWindow = 5;
+%subStep = 2;
+%randFeatureLength = 40;
 
 %%% output directory
 id = '';
@@ -29,7 +31,7 @@ generate_scheme = 1;
 new_random_matrix = 1;
 do_kmeans = ones(10, 1);
 do_extract_features = 1;
-do_classification = 0;
+do_classification = 1;
 fprintf('at: %s\n', datestr(now));
 fprintf('%s: %d\n', 'generate testing scheme', generate_scheme);
 fprintf('%s: %d\n', 'new random matrix      ', new_random_matrix);
@@ -117,7 +119,7 @@ for f = 1:length(testScheme)
         mkdir([resultSet, '/fea']);
         cuboidInput = [patchSet, '/%s'];
         feaOutput = [resultSet, '/fea'];
-        %samplePerFile = 50;
+
         extractFeatures(...
             resultSet, cuboidInput, feaOutput,...
             windowSize, subWindow, subStep, randMat);
@@ -125,6 +127,9 @@ for f = 1:length(testScheme)
 
     if do_classification
         % classify features
+        feaSet = [resultSet, '/fea'];
+        classifyFeatures(feaSet, resultSet, trainInd, testInd);
     end
 end
 diary off;
+end

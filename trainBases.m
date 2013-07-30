@@ -1,5 +1,6 @@
 function [] = trainBases(...
-        baseDir, cuboidSet, trainInd, windowSize, subSize, step3d, k, randMat, samplePerFile)
+        baseDir, cuboidSet, trainInd,...
+        windowSize, subSize, step3d, k, randMat, samplePerFile)
 
 fprintf('%s find %d clusters on small window %d\n', datestr(now), k, subSize);
 % params
