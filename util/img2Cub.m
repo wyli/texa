@@ -11,6 +11,9 @@ try
         segImg, windowSize, step);
 catch e
     fprintf('%s\n', e.identifier);
+    location = [];
+    cuboid = [];
+    return
 end
 randIndex = randsample(size(locations3d,1), min(size(locations3d,1), numOfSamples));
 fprintf('%d locations found, Randomly choose %d locations.\n ',...

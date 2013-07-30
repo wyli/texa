@@ -36,16 +36,22 @@ for i = 1:size(xmlFiles, 1)
         oriFile = sprintf(oriImgSet, imgSet, name, part);
         fprintf('input: %s\n', segFile);
         fprintf('input: %s\n', oriFile);
-        [cubPart, location] = img2Cub(oriFile, segFile, window3d, step3d, maxSizePerFile);
-        cubPart(2, :) = location;
-        cuboid = [cuboid, cubPart];
+        [cubPart, location] = img2Cub(oriFile, segFile,...
+            window3d, step3d, maxSizePerFile);
+        if ~isempty(location)
+            cubPart(2, :) = location;
+            cuboid = [cuboid, cubPart];
+        end
     end
 
     for j = 1:size(cuboid, 2)
-
         cuboid{3, j} = rec.annotation;
     end
 
+    if isempty(cuboid)
+        fprintf('no cuboid from this file.\n');
+        continue;
+    end
     badIndex = cellfun(@isempty, cuboid(1, :));
     cuboid(:, badIndex) = [];
     cuboidSet = sprintf('%s/%s', outputSet, name);
