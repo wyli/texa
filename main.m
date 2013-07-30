@@ -8,7 +8,7 @@ subStep = 2;
 randFeatureLength = 30;
 
 %%% output directory
-%id = '';
+id = '';
 if isempty(id)
     id = datestr(now, 30);
     id = sprintf('RP_%s', id);
@@ -120,7 +120,7 @@ for f = 1:length(testScheme)
         %samplePerFile = 50;
         extractFeatures(...
             resultSet, cuboidInput, feaOutput,...
-            windowSize, subWindow, subStep, randMat, clicks);
+            windowSize, subWindow, subStep, randMat);
     end
 
     diary off; return;

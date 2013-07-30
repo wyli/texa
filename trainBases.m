@@ -9,7 +9,7 @@ numOfSubsamples = 10;
 cuboidSet = [cuboidSet '/%s'];
 
 % output
-clusterFile = [baseDir, '/clusters_' int2str(samplePerFile) '.mat'];
+clusterFile = [baseDir, '/clusters.mat'];
 
 localSet = [];
 listFiles = dir(sprintf(cuboidSet, '*.mat'));
