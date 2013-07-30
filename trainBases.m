@@ -39,7 +39,8 @@ localSet = (randMat*localSet')';
 %assert(size(localSet, 1) > 40000, '%d %d', size(localSet, 1), size(localSet, 2));
 %r = randsample(size(localSet, 1), 40000);
 %localSet = localSet(r, :);
-fprintf('%s local patch set size: %dx%d\n', size(localSet));
+fprintf('%s local patches: %d, feature dimension: %d\n',...
+    datestr(now), size(localSet));
 prm.nTrial = 3;
 prm.display = 1;
 [~, clusters] = kmeans2(localSet, k, prm);

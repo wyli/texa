@@ -7,7 +7,7 @@ subWindow = 5;
 randFeatureLength = 30;
 
 %%% output directory
-id = '';
+%id = '';
 if isempty(id)
     id = datestr(now, 30);
     id = sprintf('RP_%s', id);
@@ -26,7 +26,7 @@ xmlSet = 'C:/OPT_dataset/Description';
 %%% flags
 generate_scheme = 1;
 new_random_matrix = 1;
-do_kmeans = ones(10, 1);
+do_kmeans = zeros(10, 1);
 do_extract_features = 1;
 do_classification = 0;
 fprintf('at: %s\n', datestr(now));
@@ -108,8 +108,6 @@ for f = 1:length(testScheme)
             windowSize, subWindow, subStep, kcenters, randMat, samplePerFile);
     end
 
-    diary off; return;
-
     if do_extract_features
 
         temp = load([out_dir, '/randMat']);
@@ -118,12 +116,14 @@ for f = 1:length(testScheme)
 
         mkdir([resultSet, '/fea']);
         cuboidInput = [patchSet, '/'];
-        feaOutput = [resultSet, '/fea' int2str(clicks) '/high'];
+        feaOutput = [resultSet, '/fea'];
         %samplePerFile = 50;
         extractFeatures(...
             resultSet, cuboidInput, feaOutput,...
             windowSize, 9, 1, randMat, clicks);
     end
+
+    diary off; return;
 
     if do_classification
         % classify features
