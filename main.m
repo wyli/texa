@@ -4,6 +4,7 @@ addpath(genpath('U:/github/texa')); %.git folder slow
 
 windowSize = 11;
 subWindow = 5;
+subStep = 2;
 randFeatureLength = 30;
 
 %%% output directory
@@ -97,7 +98,6 @@ for f = 1:length(testScheme)
 
         kcenters = 200;
         samplePerFile = 1;
-        subStep = 2;
 
         temp = load([out_dir, '/randMat']);
         randMat = temp.randMat;
@@ -120,7 +120,7 @@ for f = 1:length(testScheme)
         %samplePerFile = 50;
         extractFeatures(...
             resultSet, cuboidInput, feaOutput,...
-            windowSize, 9, 1, randMat, clicks);
+            windowSize, subWindow, subStep, randMat, clicks);
     end
 
     diary off; return;

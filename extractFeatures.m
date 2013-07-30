@@ -16,35 +16,34 @@ tempclusters = load(clusterSet);
 clusters = tempclusters.clusters;
 listFiles = dir(sprintf(cuboidSet, windowSize, '*.mat'));
 for i = 1:size(listFiles, 1)
-    fprintf('%s extracting BoG features %s\n', datestr(now), listFiles(i).name);
+    fprintf('%s extracting BoW features %s\n', datestr(now), listFiles(i).name);
+
     cuboidFile = sprintf(cuboidSet, windowSize, listFiles(i).name);
     temp = load(cuboidFile);
     cuboid = temp.cuboid;
-%     if(samplePerFile < size(cuboid, 2))
-%         r = randsample(size(cuboid, 2), min(size(cuboid, 2), samplePerFile));
-%         cuboid = cuboid(:, r);
-%         save(cuboidFile, 'cuboid');
-%     end
+
     locations = cuboid(2,:);
     CHL = cuboid(3,:);
+
 %    cuboid = cuboid(1,:);
 
-    %idMat = ones(1, size(cuboid, 2));
-    %repSize = mat2cell(idMat.*subSize, 1, idMat);
-    %repStep = mat2cell(idMat.*step3d, 1, idMat);
+%    idMat = ones(1, size(cuboid, 2));
+%    repSize = mat2cell(idMat.*subSize, 1, idMat);
+%    repStep = mat2cell(idMat.*step3d, 1, idMat);
 %    rMat = ones(1, size(cuboid, 2)) * size(clusters, 2);
 %    repClusters = mat2cell(...
 %        repmat(clusters, 1, size(cuboid,2)), size(clusters, 1), rMat);
 
-%     histograms = cellfun(@cuboid2Hist,...
+%    histograms = cellfun(@cuboid2Hist,...
 %         cuboid, repClusters, repSize, repStep, 'UniformOutput', false);
 %    histograms = cellfun(@cuboid2Hist,...
 %        cuboid, repClusters, 'UniformOutput', false);
-%     clear rMat repClusters repSize repStep cuboid;
+%    clear rMat repClusters repSize repStep cuboid;
 
     histograms = cell(1, size(cuboid,2));
     for index = 1:length(histograms)
-        histograms{index} = cuboid2Hist(cuboid{4, index}, clusters);
+        histograms{index} = cuboid2Hist(...
+            cuboid{1, index}, clusters, subSize, step3d);
     end
     %clear rMat repClusters cuboid;
     X_features = cell2mat(histograms');
@@ -66,6 +65,9 @@ xs = halfSize:wStep:(imgSize(1) - halfSize);
 %zs = halfSize:wStep:(imgSize(3) - halfSize);
 %[x y z] = meshgrid(xs, ys, zs);
 [x y z] = meshgrid(xs, xs, xs);
+x = x(:);
+y = y(:);
+z = z(:);
 % [x, y, z] = meshgrid(5:2:17);
 % x = x(:);
 % y = y(:);
