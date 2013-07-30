@@ -113,7 +113,7 @@ while( any(oldIDX~=IDX) && t<maxt )
     k0=k0+1; IDX(ids)=k0; C(k0,:)=sum(X(ids,:),1)/nCl;
   end
   if(k0>0), k=k0; C=C(1:k,:); else k=1; C=X(randint2(1,1,[1 N]),:); end
-  t=t+1; if(dsp), fprintf([repmat('\b',[1 nDg]) int2str2(t,nDg)]); end
+  t=t+1; %if(dsp), fprintf([repmat('\b',[1 nDg]) int2str2(t,nDg)]); end
 end
 
 % record within-cluster sums of point-to-centroid distances
