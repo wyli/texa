@@ -26,7 +26,12 @@ for log10c = -5:5
     if modelnow.Label(1) == 0
         scores = -scores;
     end
-    [~, ~, ~, auc] = perfcurve(Y, scores, 1);
+    try
+        [~, ~, ~, auc] = perfcurve(Y, scores, 1);
+    catch err
+        err
+        auc = 0
+    end
     if(auc > aucnow && sum(modelnow.w) ~= 0)
         bestcmd = cmd;
     end

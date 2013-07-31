@@ -39,7 +39,7 @@ do_kmeans = ones(10, 1);
 do_extract_features = 1;
 do_classification = 1;
 fprintf('at: %s\n', datestr(now));
-fprintf('%s: %d\n', 'generate testing scheme', generate_scheme);
+fprintf('%s: %d\n', 'generate testing schemellInd', generate_scheme);
 fprintf('%s: %d\n', 'new random matrix      ', new_random_matrix);
 fprintf('%s: %d\n', 'do kmeans on training  ', do_kmeans(1));
 fprintf('%s: %d\n', 'extract features on all', do_extract_features);
@@ -47,35 +47,10 @@ fprintf('%s: %d\n', 'do classification      ', do_classification);
 fprintf('\n\n');
 % end of flags
 
-%%% 10-fold cross validation scheme
-k = 10;
-foldSize = 9;
-files = dir([xmlSet, '/*.xml']);
-L_ind = [];
-H_ind = [];
-C_ind = [];
-for i = 1:length(files)
-    rec = VOCreadxml([xmlSet '/' files(i).name]);
-    if strcmp(rec.annotation.type, 'LGD')
-        L_ind(end+1) = i;
-    elseif strcmp(rec.annotation.type, 'HGD')
-        H_ind(end+1) = i;
-    else
-        C_ind(end+1) = i;
-    end
-end
-L_ind = L_ind(randperm(size(L_ind, 2)));
-H_ind = H_ind(randperm(size(H_ind, 2)));
-C_ind = C_ind(randperm(size(C_ind, 2)));
-allInd = zeros(1, k*foldSize);
-allInd(1, 1:3:end) = L_ind;
-allInd(1, 2:3:end) = H_ind;
-allInd(1, 3:3:end) = C_ind;
-clear L_ind H_ind C_ind;
+% generate random splitting
 if generate_scheme
-    allInd = randsample(k*foldSize, k*foldSize);
-    allInd = reshape(allInd, foldSize, []);
-    testScheme = eye(k, 'int8');
+    [testScheme, allInd] = CrossValidationScheme(...
+        10, 9, xmlSet, patchSet
     save([out_dir '/exparam'], 'testScheme', 'allInd');
 else
     temp = load([out_dir '/exparam']);
@@ -83,6 +58,7 @@ else
     allInd = temp.allInd;
     clear temp
 end
+
 
 %%% random matrix for projection (global)
 if new_random_matrix
@@ -100,7 +76,9 @@ for f = 1:length(testScheme)
     % selecting f(th) testing schemes
     trainInd = allInd(:, ~testScheme(f, :));
     trainInd = trainInd(:);
+    trainInd = trainInd(trainInd > 0);
     testInd = allInd(:, f);
+    testInd = testInd(testInd > 0);
 
     if do_kmeans(f)
 

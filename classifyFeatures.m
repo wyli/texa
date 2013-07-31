@@ -22,7 +22,12 @@ for k = 1:3
     if classifier{k}.Label(1) == 0
         s = -s;
     end
-    [~, ~, ~, auc] = perfcurve(testY_k, s, 1);
+    try
+        [~, ~, ~, auc] = perfcurve(testY_k, s, 1);
+    catch err
+        err
+        auc = 0;
+    end
     aucs(k) = auc;
     scores(:, k) = s;
 end

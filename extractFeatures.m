@@ -20,7 +20,7 @@ else
     h = halfSize;
     t = windowSize - halfSize + 1;
 end
-xs = h:step3d:t
+xs = h:step3d:t;
 [x y z] = meshgrid(xs, xs, xs);
 x = x(:);
 y = y(:);
