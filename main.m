@@ -50,7 +50,7 @@ fprintf('\n\n');
 % generate random splitting
 if generate_scheme
     [testScheme, allInd] = CrossValidationScheme(...
-        10, 9, xmlSet, patchSet
+        10, 9, xmlSet, patchSet);
     save([out_dir '/exparam'], 'testScheme', 'allInd');
 else
     temp = load([out_dir '/exparam']);
