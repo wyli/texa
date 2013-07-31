@@ -23,7 +23,7 @@ for log10c = -5:5
     modelnow = train(Y, X, [cmd ' -q']);
     [~, ~, scores] = predict(Y, X, modelnow, ' -q');
     scores(isnan(scores)) = 0;
-    if modelnow.Label(1) == -1
+    if modelnow.Label(1) == 0
         scores = -scores;
     end
     [~, ~, ~, auc] = perfcurve(Y, scores, 1);

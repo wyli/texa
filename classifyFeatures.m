@@ -19,7 +19,7 @@ for k = 1:3
     testY_k = double(testY == k);
     [~, ~, s] = predict(testY_k, testX, classifier{k});
     s(isnan(s)) = 0;
-    if classifier{k}.Label(1) == -1
+    if classifier{k}.Label(1) == 0
         s = -s;
     end
     [~, ~, ~, auc] = perfcurve(testY_k, s, 1);
