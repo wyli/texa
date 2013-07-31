@@ -41,7 +41,7 @@ end
 function histogram = cuboid2Hist(image3d, clusters, wSize)
 global projMat
 
-localCuboids = im3col(double(image3d), [wSize, wSize, wSize]);
+localCuboid = im3col(double(image3d), [wSize, wSize, wSize]);
 localCuboid = localCuboid'*projMat';
 D = dist2(localCuboid, clusters);
 [~, nearest] = min(D, [], 2);
