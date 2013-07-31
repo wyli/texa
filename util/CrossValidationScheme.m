@@ -53,7 +53,7 @@ while valid < 0 && repeat < 100
     repeat = repeat + 1;
 end
 if valid < 0
-    err = MException('cross validation: bad folds splitting.'...
+    err = MException('cross validation: bad folds splitting.',...
         'not balanced instances for 10-fold cross validation.\n');
     throw(err);
 end
