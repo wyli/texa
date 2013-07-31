@@ -1,4 +1,4 @@
-function [] = trainBases(...
+function [] = trainBases(files,...
         baseDir, cuboidSet, trainInd,...
         windowSize, subSize, step3d, k, randMat, samplePerFile)
 
@@ -13,12 +13,11 @@ cuboidSet = [cuboidSet '/%s'];
 clusterFile = [baseDir, '/clusters.mat'];
 
 localSet = [];
-listFiles = dir(sprintf(cuboidSet, '*.mat'));
 for j = 1:size(trainInd, 1)
 
     i = trainInd(j);
 
-    cuboidFile = sprintf(cuboidSet, listFiles(i).name);
+    cuboidFile = sprintf(cuboidSet, files(i).name);
     temp = load(cuboidFile);
     cuboid = temp.cuboid;
 

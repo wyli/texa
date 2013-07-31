@@ -49,13 +49,14 @@ fprintf('\n\n');
 
 % generate random splitting
 if generate_scheme
-    [testScheme, allInd] = CrossValidationScheme(...
+    [testScheme, allInd, files] = CrossValidationScheme(...
         10, 9, xmlSet, patchSet);
-    save([out_dir '/exparam'], 'testScheme', 'allInd');
+    save([out_dir '/exparam'], 'testScheme', 'allInd', 'files');
 else
     temp = load([out_dir '/exparam']);
     testScheme = temp.testScheme;
     allInd = temp.allInd;
+    files = temp.files;
     clear temp
 end
 
@@ -65,7 +66,7 @@ if new_random_matrix
     randMat = randn(randFeatureLength, subWindow^3);
     save([out_dir, '/randMat'], 'randMat');
 end
-clear files rec i k foldSize new_random_matrix generate_scheme randFeatureLength
+clear i k foldSize new_random_matrix generate_scheme randFeatureLength
 
 for f = 1:length(testScheme)
 
@@ -89,7 +90,7 @@ for f = 1:length(testScheme)
         randMat = temp.randMat;
         clear temp;
 
-        trainBases(...
+        trainBases(files,...
             resultSet, patchSet, trainInd,...
             windowSize, subWindow, subStep, kcenters, randMat, samplePerFile);
     end
@@ -112,7 +113,7 @@ for f = 1:length(testScheme)
     if do_classification
         % classify features
         feaSet = [resultSet, '/fea'];
-        classifyFeatures(feaSet, resultSet, trainInd, testInd);
+        classifyFeatures(files, feaSet, resultSet, trainInd, testInd);
     end
 end
 avgAUC = AveragedMultiClassAUC([windowSize, subWindow], typeString)

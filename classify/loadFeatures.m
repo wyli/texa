@@ -1,15 +1,16 @@
-function [features, labels] = loadFeatures(setpath, ind)
-lsFiles = dir([setpath '/*.mat']); % features.mat
+function [features, labels] = loadFeatures(setpath, ind, files)
+%lsFiles = dir([setpath '/*.mat']); % features.mat
 features = [];
 y = [];
 for i = 1:length(ind)
 
-    fprintf(['%s\n'], lsFiles(ind(i)).name);
-    temp = load([setpath, '/', lsFiles(ind(i)).name]);
+    j = ind(i);
+    fprintf(['%s\n'], files(j).name);
+    temp = load([setpath, '/', files(j).name]);
     features = [features, temp.X_features];
     y = [y, temp.CHL(1,:)];
 end
-clear lsFiles temp;
+clear temp;
 
 features = features';
 labels = zeros(size(y))';
