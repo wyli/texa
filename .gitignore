@@ -217,4 +217,5 @@ pip-log.txt
 *.asv
 *.log
 *.mat
-.DS_store
+.DS_Store
+._.DS_Store
