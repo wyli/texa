@@ -1,15 +1,21 @@
 function [] = extractFeatures(...
         baseSet, cuboidSet, feaSet, ...
-        windowSize, subSize, randMat)
+        windowSize, subSize, step, randMat)
 
-global projMat
-projMat = randMat;
 fprintf('%s build histogram for each cuboid\n', datestr(now));
 
 % input
 clusterSet = [baseSet, '/clusters.mat'];
 % output
 feaSet = [feaSet '/%s'];
+
+% parameter
+p = 0;
+len = 0;
+while p < (windowSize-subSize+1)
+    p = p + step;
+    len = len + 1;
+end
 
 tempclusters = load(clusterSet);
 clusters = tempclusters.clusters;
@@ -27,7 +33,7 @@ for i = 1:size(listFiles, 1)
     histograms = cell(1, size(cuboid,2));
     for index = 1:length(histograms)
         histograms{index} = cuboid2Hist(...
-            cuboid{1, index}, clusters, subSize);
+            cuboid{1, index}, clusters, subSize, randMat, step, len);
     end
     %clear rMat repClusters cuboid;
     X_features = cell2mat(histograms');
@@ -38,13 +44,12 @@ for i = 1:size(listFiles, 1)
 end
 end
 
-function histogram = cuboid2Hist(image3d, clusters, wSize)
-global projMat
+function histogram = cuboid2Hist(image3d, clusters, wSize, projMat, step, len)
 
-localCuboid = im3col(double(image3d), [wSize, wSize, wSize]);
+localCuboid = im3col(double(image3d), [wSize, wSize, wSize], [step,len]);
 localCuboid = localCuboid'*projMat';
-D = dist2(localCuboid, clusters);
-[~, nearest] = min(D, [], 2);
-bins = 1:size(clusters, 1);
-histogram = histc(nearest', bins);
+[~, nearest] = min(dist2(localCuboid, clusters), [], 2);
+%D = dist2(localCuboid, clusters);
+%[~, nearest] = min(D, [], 2);
+histogram = histc(nearest', 1:size(clusters,1));
 end

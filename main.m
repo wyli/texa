@@ -106,7 +106,7 @@ for f = 1:length(testScheme)
 
         extractFeatures(...
             resultSet, cuboidInput, feaOutput,...
-            windowSize, subWindow, randMat);
+            windowSize, subWindow, subStep, randMat);
     end
 
     if do_classification
