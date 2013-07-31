@@ -52,8 +52,14 @@ function localCuboid = sampleSubCuboids(image3d, wSize, wStep)
 global numOfSubsamples;
 imgSize = size(image3d);
 halfSize = ceil(wSize/2);
-
-xs = halfSize:wStep:(imgSize(1) - halfSize);
+if halfSize == wSize
+    h = halfSize + 1;
+    t = imgSize(1) - halfSize;
+else
+    h = halfSize;
+    t = imgSize(1) - halfSize + 1;
+end
+xs = h:wStep:t;
 %ys = halfSize:wStep:(imgSize(2) - halfSize);
 %zs = halfSize:wStep:(imgSize(3) - halfSize);
 

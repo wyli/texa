@@ -13,7 +13,14 @@ feaSet = [feaSet '/%s'];
 
 % dense sampling grid
 halfSize = ceil(subSize/2);
-xs = halfSize:step3d:(windowSize - halfSize);
+if halfSize == subSize
+    h = halfSize + 1;
+    t = windowSize - halfSize;
+else
+    h = halfSize;
+    t = windowSize - halfSize + 1;
+end
+xs = h:step3d:t
 [x y z] = meshgrid(xs, xs, xs);
 x = x(:);
 y = y(:);

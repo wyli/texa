@@ -1,5 +1,11 @@
 function main(windowSize, subWindow, subStep, randFeatureLength)
 %clear all; close all;
+t = ceil(subWindow/2);
+h = windowSize - t + 1;
+if (length(t:subStep:h) < 2) || (randFeatureLength > windowSize^3)
+    fprintf('bad parameters\n');
+    return;
+end
 RandStream.setGlobalStream(RandStream('mt19937ar', 'Seed', 'shuffle'));
 addpath(genpath('U:/github/texa')); %.git folder slow
 
