@@ -22,9 +22,20 @@ for k = 1:length(results)
     Y = [Y; x.testY];
 end
 avgAUC = 0;
+color = ['r', 'g', 'b'];
+figure
 for c = 1:3
     [a, b, ~, auc] = perfcurve(double(Y==c), allScores(:,c), '1');
-    plot(a,b); hold on;
+    h = plot(a,b,color(c)); 
+    hold on;
+    auc
     avgAUC = avgAUC + auc * (sum(Y==c) / length(Y));
 end
+legend('Cancers', 'HGD', 'LGD');
+titleString = sprintf('%s-window-%2d-subwindow-%d-averageAUC-%.2f',...
+    typeString, windowSize(1), windowSize(2), avgAUC);
+title(titleString);
+filename = sprintf('%s-%2d-%2d', typeString, windowSize(1), windowSize(2));
+print('-deps', [resultSet filename '.eps']);
+print('-dtiff', [resultSet filename '.tif']);
 end

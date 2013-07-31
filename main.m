@@ -1,4 +1,4 @@
-function main(windowSize, subWindow, subStep, randFeatureLength)
+function main(typeString, windowSize, subWindow, subStep, randFeatureLength)
 %clear all; close all;
 t = ceil(subWindow/2);
 h = windowSize - t + 1;
@@ -21,7 +21,7 @@ if isempty(id)
     id = datestr(now, 30);
     id = sprintf('%s', id);
 end
-out_dir = 'F:/experiments/randomfeatures';
+out_dir = ['F:/experiments/', typeString];
 out_dir = sprintf('%s/%s_%02d_%02d', out_dir, id, windowSize, subWindow);
 mkdir(out_dir);
 diary off;
@@ -115,5 +115,7 @@ for f = 1:length(testScheme)
         classifyFeatures(feaSet, resultSet, trainInd, testInd);
     end
 end
+avgAUC = AveragedMultiClassAUC([windowSize, subWindow], typeString)
+avgAUC = allScoresROC([windowSize, subWindow], typeString)
 diary off;
 end
