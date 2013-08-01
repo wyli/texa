@@ -1,0 +1,50 @@
+/home/wyli/shared/cuboid_11
+Cancers - image: 30, patch: 38900
+HGD:    - image: 30, patch: 25206
+LGD:    - image: 30, patch: 40000
+Total:  - image: 90, patch: 104106
+/home/wyli/shared/cuboid_21
+Cancers - image: 30, patch: 32509
+HGD:    - image: 30, patch: 13947
+LGD:    - image: 30, patch: 38668
+Total:  - image: 90, patch: 85124
+/home/wyli/shared/cuboid_31
+Cancers - image: 30, patch: 22438
+HGD:    - image: 28, patch: 5609
+LGD:    - image: 30, patch: 33153
+Total:  - image: 88, patch: 61200
+/home/wyli/shared/cuboid_41
+Cancers - image: 30, patch: 12565
+HGD:    - image: 27, patch: 2210
+LGD:    - image: 30, patch: 22921
+Total:  - image: 87, patch: 37696
+/home/wyli/shared/cuboid_51
+Cancers - image: 29, patch: 6815
+HGD:    - image: 22, patch: 895
+LGD:    - image: 30, patch: 14894
+Total:  - image: 81, patch: 22604
+/home/wyli/shared/cuboid_61
+Cancers - image: 27, patch: 3861
+HGD:    - image: 18, patch: 393
+LGD:    - image: 30, patch: 8636
+Total:  - image: 75, patch: 12890
+/home/wyli/shared/cuboid_71
+Cancers - image: 25, patch: 2269
+HGD:    - image: 13, patch: 140
+LGD:    - image: 30, patch: 5447
+Total:  - image: 68, patch: 7856
+/home/wyli/shared/cuboid_81
+Cancers - image: 25, patch: 1159
+HGD:    - image: 8, patch: 48
+LGD:    - image: 29, patch: 2795
+Total:  - image: 62, patch: 4002
+/home/wyli/shared/cuboid_91
+Cancers - image: 25, patch: 643
+HGD:    - image: 4, patch: 20
+LGD:    - image: 27, patch: 1640
+Total:  - image: 56, patch: 2303
+/home/wyli/shared/cuboid_101
+Cancers - image: 20, patch: 474
+HGD:    - image: 2, patch: 8
+LGD:    - image: 23, patch: 1162
+Total:  - image: 45, patch: 1644
