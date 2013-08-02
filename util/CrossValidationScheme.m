@@ -1,5 +1,6 @@
 function [testScheme, allInd, files] = CrossValidationScheme(...
         k, foldSize, xmlSet, patchSet)
+fprintf('generating random folds\n');
 
 % assumed k*foldSize == length(L_ind) + length(H_ind) + length(C_ind)   
 % assumed file names format (ddd.xml and ddd.mat)
@@ -28,13 +29,11 @@ end
 % generate balanced scheme
 valid = -1; 
 repeat = 1;
-while valid < 0 && repeat < 100
+while valid < 0 && repeat < 1000
 
     schemeMat = randomSplit(L_ind, H_ind, C_ind, k, foldSize);
     for i = 1:length(schemeMat)
         if ~exist([patchSet '/' files(schemeMat(i)).name '.mat'], 'file')
-            fprintf('missing patch set: %s\n',...
-                [patchSet '/' files(schemeMat(i)).name]);
             schemeMat(i) = 0; % no patche from some images due to large window size
         end
     end
@@ -53,7 +52,7 @@ while valid < 0 && repeat < 100
     repeat = repeat + 1;
 end
 if valid < 0
-    err = MException('cross validation: bad folds splitting.',...
+    err = MException('cv: bad folds splitting.',...
         'not balanced instances for 10-fold cross validation.\n');
     throw(err);
 end
