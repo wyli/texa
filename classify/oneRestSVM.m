@@ -1,13 +1,9 @@
 function [classifier, valid_scores, validY] = oneRestSVM(labels, features)
-    %sparse
 
     classifier = cell(3, 1);
     folds = fold_k_partition(labels, 3); % 3-fold validation sets
-    assert(length(folds) == 3)
 
-    temp = cell2mat(folds);
-    validY = labels(temp(:));
-    clear temp;
+    validY = labels(cell2mat(folds));
     valid_scores = zeros(length(labels), 3);
 
     for c = 1:3
@@ -87,7 +83,7 @@ function [folds] = fold_k_partition(all_labels, k)
     steps = diff(pos);
 
     select = [];
-    for i = 1:classes
+    for i = 1:length(classes)
         select = [select; padarray([1:k]', steps(i)-k, 'circular', 'pre')];
     end
 
@@ -95,9 +91,9 @@ function [folds] = fold_k_partition(all_labels, k)
     for f = 1:k
         folds{f} = ori_index(select==f);
     end
-
     % k = 3;
-    %assert(length(select) == length(all_labels));
+    %x = cell2mat(folds);
+    %assert(length(x(:)) == length(all_labels));
     %assert(length(classes)==3);
     %assert(length(pos)==4);
     %assert(all(diff(pos)>=3));
