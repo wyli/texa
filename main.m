@@ -16,7 +16,7 @@ addpath(genpath('U:/github/texa')); %.git folder slow
 %randFeatureLength = 40;
 
 %%% output directory
-reclassify = 1;
+reclassify = 0;
 if reclassify
 
     generate_scheme = 0;
@@ -26,15 +26,15 @@ if reclassify
     do_classification = 1;
     draw_fig = 0;
 
-    out_dir = ['F:/experiments/', typeString];
-    out_dir = sprintf('%s/*_%02d_%02d', out_dir, windowSize, subWindow);
+    base = ['F:/experiments/', typeString];
+    out_dir = sprintf('%s/*_%02d_%02d', base, windowSize, subWindow);
     x = dir(out_dir);
     if length(x) ~= 1
         fprintf('not existing or ambiguous directory %02d_%02d\n', windowSize, subWindow);
-        return
+        return;
     end
-    out_dir = x(1).name;
-    return
+    out_dir = sprintf('%s/%s', base, x(1).name);
+    fprintf('valid directory. %s\n', out_dir);
     diary off;
     diary([out_dir '/exp_valid.log']);
 else

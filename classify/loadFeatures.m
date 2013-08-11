@@ -5,7 +5,6 @@ y = [];
 for i = 1:length(ind)
 
     j = ind(i);
-    fprintf(['%s\n'], files(j).name);
     temp = load([setpath, '/', files(j).name]);
     features = [features, temp.X_features];
     y = [y, temp.CHL(1,:)];

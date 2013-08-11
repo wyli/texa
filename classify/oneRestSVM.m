@@ -2,7 +2,7 @@ function [classifier, valid_scores, validY] = oneRestSVM(labels, features)
     %sparse
 
     classifier = cell(3, 1);
-    folds = fold_k_partition(trainY, 3); % 3-fold validation sets
+    folds = fold_k_partition(labels, 3); % 3-fold validation sets
 
     validY = labels(cell2mat(folds));
     valid_scores = zeros(length(labels), 3);
@@ -28,7 +28,14 @@ function [classifier, valid_scores, validY] = oneRestSVM(labels, features)
             validY_cf = binary_y(folds{f});
             valid_fea = features(folds{f}, :);
 
-            [~, ~, s] = predict(validY_cf, sparse(valid_fea), classifier{f})
+            [~, ~, s] = predict(validY_cf, sparse(valid_fea), classifier{c});
+            if isempty(s)
+                f
+                c
+                size(valid_fea)
+                size(validY_cf)
+                assert(~isempty(s));
+            end
             clear validY_cf, valid_fea;
 
             valid_scores(from:from+length(s)-1,c) = s;
@@ -38,6 +45,8 @@ function [classifier, valid_scores, validY] = oneRestSVM(labels, features)
 end
 
 function [bestcmd] = searchParam(Y, X, folds)
+    
+    fprintf('choose parameters on svm\n');
     bestcmd = [];
     accnow = 0;
 
@@ -58,8 +67,9 @@ function [bestcmd] = searchParam(Y, X, folds)
             clear validY, valid_fea;
             acc = acc + a(1);
         end
-        if acc > accnow
+        if (acc >= accnow && sum(modelnow.w) ~= 0)
             bestcmd = cmd;
+            fprintf('best acc now: %.2f\n', acc/3.0);
         end
     end
 end
