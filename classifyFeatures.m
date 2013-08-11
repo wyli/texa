@@ -1,13 +1,13 @@
 function [] = classifyFeatures(files, feaSet, resultSet, trainInd, testInd)
 
-addpath('U:/archives/liblinear-1.93/matlab/'); % warning window binary bugs
+addpath('U:/archives/liblinear-1.93/matlab/'); % warning windows binary bugs
 fprintf('classify features\n');
 
 [trainX, trainY] = loadFeatures(feaSet, trainInd, files);
 trainX = sparse(trainX);
 %save('features.mat');
 
-classifier = oneRestSVM(trainY, trainX);
+[classifier, valid_scores, validY] = oneRestSVM(trainY, trainX);
 clear trainY trainX;
 
 [testX, testY] = loadFeatures(feaSet, testInd, files);
@@ -31,5 +31,6 @@ for k = 1:3
     aucs(k) = auc;
     scores(:, k) = s;
 end
-save([resultSet, '/out'], 'aucs', 'scores', 'testY');
+save([resultSet, '/out_valid'], 'aucs', 'scores', 'testY', 'valid_scores', 'validY');
+save([resultSet, '/classifier_valid'], 'classifier');
 end
