@@ -77,24 +77,11 @@ function [folds] = fold_k_partition(all_labels, k)
 
     % partition labels into k balanced folds
     % return k group indexes
-    [sorted, ori_index] = sort(all_labels);
-    [classes, pos, ~] = unique(sorted);
-    pos = [0; pos];
-    steps = diff(pos);
-
-    select = [];
-    for i = 1:length(classes)
-        select = [select; padarray([1:k]', steps(i)-k, 'circular', 'pre')];
-    end
+    [~, ori_index] = sort(all_labels);
+    select = padarray([1:k]', length(sorted)-k, 'circular', 'pre');
 
     folds = cell(k, 1);
     for f = 1:k
         folds{f} = ori_index(select==f);
     end
-    % k = 3;
-    %x = cell2mat(folds);
-    %assert(length(x(:)) == length(all_labels));
-    %assert(length(classes)==3);
-    %assert(length(pos)==4);
-    %assert(all(diff(pos)>=3));
 end
