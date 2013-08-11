@@ -31,7 +31,6 @@ for k = 1:3
     aucs(k) = auc;
     scores(:, k) = s;
 end
-return
 save([resultSet, '/out_valid'], 'aucs', 'scores', 'testY', 'valid_scores', 'validY');
 save([resultSet, '/classifier_valid'], 'classifier');
 end
