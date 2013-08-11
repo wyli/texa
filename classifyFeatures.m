@@ -33,6 +33,8 @@ for k = 1:3
     scores(:, k) = s;
 end
 testY = int8(testY);
+valid_scores = single(valid_scores);
+scores = single(scores);
 save([resultSet, '/out_valid'], 'aucs', 'scores', 'testY', 'valid_scores', 'validY');
 save([resultSet, '/classifier_valid'], 'classifier');
 end
