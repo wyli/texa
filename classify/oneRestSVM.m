@@ -4,7 +4,8 @@ function [classifier, valid_scores, validY] = oneRestSVM(labels, features)
     classifier = cell(3, 1);
     folds = fold_k_partition(labels, 3); % 3-fold validation sets
 
-    validY = labels(cell2mat(folds));
+    temp = cell2mat(folds);
+    validY = labels(temp(:));
     valid_scores = zeros(length(labels), 3);
 
     for c = 1:3
