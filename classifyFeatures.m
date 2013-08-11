@@ -8,6 +8,7 @@ trainX = sparse(trainX);
 %save('features.mat');
 
 [classifier, valid_scores, validY] = oneRestSVM(trainY, trainX);
+validY = int8(validY);
 clear trainY trainX;
 
 [testX, testY] = loadFeatures(feaSet, testInd, files);
@@ -31,6 +32,7 @@ for k = 1:3
     aucs(k) = auc;
     scores(:, k) = s;
 end
+testY = int8(testY);
 save([resultSet, '/out_valid'], 'aucs', 'scores', 'testY', 'valid_scores', 'validY');
 save([resultSet, '/classifier_valid'], 'classifier');
 end
