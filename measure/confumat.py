@@ -18,7 +18,7 @@ def calc_roc(result_file, pos):
     labels = [item-1 for sublist in labels.tolist() for item in sublist]
     pre = [np.argmax(rows) for rows in scores]
     
-    for i, j in zip(pre, labels):
+    for i, j in zip(labels, pre):
         c_mat[i,j] += 1
     return c_mat
 
@@ -40,6 +40,7 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
             tmp_arr.append(float(j)/float(a))
         norm_conf.append(tmp_arr)
     fig = plt.figure()
+    plt.clf()
     ax = fig.add_subplot(111)
     ax.set_aspect(1)
     res = ax.imshow(np.array(norm_conf), cmap = plt.cm.gray,
@@ -50,13 +51,20 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
 
     for x in xrange(width):
         for y in xrange(height):
-            ax.annotate("%0.2f"%norm_conf[x][y], xy=(y, x),
+            ax.annotate("%d"%all_mat[x][y], xy=(y, x),
                     horizontalalignment='center',
-                    verticalalignment='center')
+                    verticalalignment='center',
+                    color='green', fontsize=24)
 
+    print all_mat
     cb = fig.colorbar(res)
-    #plt.xticks(range(3), ['CHL'])
-    #plt.yticks(range(3), ['CHL'])
+    classes = 'LHC'
+    plt.xticks(range(3), ['ICA', 'HGD', 'LGD'])
+    plt.yticks(range(3), ['ICA', 'HGD', 'LGD'])
+    plt.xlim(-0.5, 2.5)
+    plt.ylim(2.5, -0.5)
+    plt.ylabel('Targets')
+    plt.xlabel('Predicted')
     plt.savefig(fig_name, format='pdf')
 
 def experiment(typeString, window, sub_window):
@@ -70,10 +78,9 @@ def experiment(typeString, window, sub_window):
     vertical_averaged_ROC(fold_files, file_name, window, sub_window)
 
 
-windows = [21, 31, 41, 51, 61, 71]
-#windows = [31, 41, 51, 61, 71]
-sub_windows = [3, 5, 7, 9, 13]
-for i in windows:
-    for j in sub_windows:
-        experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
-#experiment('/home/wyli/shared/experiments/randomfeatures', 21, 3)
+#windows = [21, 31, 41, 51, 61, 71]
+#sub_windows = [3, 5, 9, 13]
+#for i in windows:
+#    for j in sub_windows:
+#        experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
+experiment('/home/wyli/shared/experiments/randomfeatures', 21, 3)
