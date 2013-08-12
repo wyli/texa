@@ -78,7 +78,7 @@ function [folds] = fold_k_partition(all_labels, k)
     % partition labels into k balanced folds
     % return k group indexes
     [~, ori_index] = sort(all_labels);
-    select = padarray([1:k]', length(sorted)-k, 'circular', 'pre');
+    select = padarray([1:k]', length(ori_index)-k, 'circular', 'pre');
 
     folds = cell(k, 1);
     for f = 1:k
