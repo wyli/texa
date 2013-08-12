@@ -43,7 +43,7 @@ else
     do_kmeans = ones(10, 1);
     do_extract_features = 1;
     do_classification = 1;
-    draw_fig = 1;
+    draw_fig = 0;
 
     id = '';
     if isempty(id)
