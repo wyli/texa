@@ -57,7 +57,9 @@ function [bestcmd] = searchParam(Y, X, folds)
             trainY(folds{f}) = [];
             trainX = X;
             trainX(folds{f}, :) = [];
-            cmd = ['-s 2 -c ', num2str(10^log10c)];
+            %ratio = (length(trainY) - sum(trainY))/sum(trainY);
+            ratio = (length(trainY)/sum(trainY)) - 1.0; 
+            cmd = ['-s 2 -w0 1 -w1 ' num2str(ratio), ' -c ', num2str(10^log10c)];
             modelnow = train(trainY, sparse(trainX), [cmd ' -q']);
             clear trainY, trainX;
             validY = Y(folds{f});
