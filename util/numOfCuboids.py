@@ -35,7 +35,7 @@ def countCuboids(fileString):
     print 'Total:  - image: %d, patch: %d' % (np.sum(imgCHL), np.sum(CHL))
 
 index = range(11, 102, 10)
-#index = [11]
+index = [71]
 for i in index:
     fileString = "/home/wyli/data/cuboid_%d" %(i)
     print fileString
