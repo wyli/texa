@@ -1,4 +1,4 @@
-function [] = drawSamples(imgSet, xmlSet, outputSet, windowSize, maxSizePerFile)
+function [] = drawSamples(imgSet, xmlSet, outputSet, windowSize, step, maxSizePerFile)
 % usage: 
 % >> drawSamples('~/desktop/OPTmix', '~/desktop/description', '~/desktop/cuboidset', 21)
 
@@ -17,7 +17,7 @@ mkdir(outputSet);
 
 % parameters
 window3d = windowSize * ones(1,3);
-step3d = window3d;
+step3d = step *ones(1,3);
 
 for i = 1:size(xmlFiles, 1)
 

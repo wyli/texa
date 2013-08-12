@@ -49,19 +49,21 @@ if isempty(locations)
         'Cannot find any continuous annotations given the window size.');
     throw(err);
 end
-%end % end of function
+fprintf('total locations: %d, %d\n', size(locations, 1), size(locations, 2));
+end % end of function
 
-% visualise ROI
-figure();
-colormaP(gray);
-imagesc(image3d(:,:,frameInx(10)));
-for i = 1:size(locations, 1)
-    l = locations(i,:);
-    if (l(3) == frameInx(10))
-        rectangle('Position',...
-           [l(2)-window3d(2), l(1)-window3d(1),window3d(2)*2, window3d(1)*2],'FaceColor', 'r');
-    end
-end
-
-clear i overlap;
-end
+%% visualise ROI
+%% works for 081C.mat
+%figure();
+%colormap(gray);
+%imagesc(image3d(:,:,frameInx(10)));
+%for i = 1:size(locations, 1)
+%    l = locations(i,:);
+%    if (l(3) == frameInx(10))
+%        rectangle('Position',...
+%           [l(2)-window3d(2), l(1)-window3d(1),window3d(2)*2, window3d(1)*2],'FaceColor', 'r');
+%    end
+%end
+%
+%clear i overlap;
+%end

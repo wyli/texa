@@ -7,7 +7,9 @@ load(segFile);
 
 % get interesting locations
 try
-    locations3d = scanForPositiveSampleLocations(...
+%    locations3d = scanForPositiveSampleLocations(...
+%        segImg, windowSize, step);
+    locations3d = scanForSURSLocations(...
         segImg, windowSize, step);
 catch e
     fprintf('%s\n', e.identifier);
