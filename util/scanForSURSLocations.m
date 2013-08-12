@@ -53,7 +53,7 @@ end
 
 % visualise ROI
 figure();
-colormaP(GRAY);
+colormaP(gray);
 imagesc(image3d(:,:,frameInx(10)));
 for i = 1:size(locations, 1)
     l = locations(i,:);
