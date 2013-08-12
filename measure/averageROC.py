@@ -39,7 +39,7 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
 
     for type in [cancer, HGD, LGD]:
         for i, p in enumerate(fold_path):
-            mat_file = "%s/out.mat" % p
+            mat_file = "%s/out_valid.mat" % p
             fpr, tpr, prior = calc_roc(mat_file, type)
             priors[type] += prior
             f = interpolate.interp1d(fpr, tpr)
