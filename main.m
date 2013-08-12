@@ -136,7 +136,7 @@ for f = 1:length(testScheme)
     end
 
     if do_classification
-        % classify features
+
         feaSet = [resultSet, '/fea'];
         classifyFeatures(files, feaSet, resultSet, trainInd, testInd);
     end
