@@ -1,6 +1,7 @@
 function [] = drawSamples(imgSet, xmlSet, outputSet, windowSize, maxSizePerFile)
 % usage: 
-% >> drawSamples('~/desktop/OPTmix', '~/desktop/description', '~/desktop/cuboidset', 21);
+% >> drawSamples('~/desktop/OPTmix', '~/desktop/description', '~/desktop/cuboidset', 21)
+
 fprintf('%s drawing samples.\n', datestr(now));
 fprintf('windowSize: %d\n', windowSize);
 
