@@ -28,7 +28,7 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
 
     all_mat = np.zeros((3, 3))
     for i, p in enumerate(fold_path):
-        mat_file = "%s/out.mat" % p
+        mat_file = "%s/out_valid.mat" % p
         all_mat += calc_roc(mat_file, type)
 
     norm_conf = []
@@ -69,7 +69,7 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
 
 def experiment(typeString, window, sub_window):
     exp_folder = "%s/*_%02d_%02d/" %(typeString, window, sub_window)
-    file_name = "%s/conf_mat/%02d_%02d.pdf" %(typeString, window, sub_window)
+    file_name = "%s/conf/%02d_%02d.pdf" %(typeString, window, sub_window)
     print file_name
     exp_files = glob.glob(exp_folder)
     if len(exp_files) == 0:
@@ -78,9 +78,9 @@ def experiment(typeString, window, sub_window):
     vertical_averaged_ROC(fold_files, file_name, window, sub_window)
 
 
-#windows = [21, 31, 41, 51, 61, 71]
-#sub_windows = [3, 5, 9, 13]
-#for i in windows:
-#    for j in sub_windows:
-#        experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
-experiment('/home/wyli/shared/experiments/randomfeatures', 21, 3)
+windows = [11, 21, 31, 41, 51, 61, 71]
+sub_windows = [3, 5, 7, 9, 13]
+for i in windows:
+    for j in sub_windows:
+        experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
+#experiment('/home/wyli/shared/experiments/randomfeatures', 11, 9)
