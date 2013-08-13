@@ -48,8 +48,8 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
             #mean_tpr[:, type, i] = interp(mean_fpr, fpr, tpr)
             mean_tpr[:, type, i] = f(mean_fpr)
 
-    fig_title = ("ROC of Random Features."
-            "window %%d - sub_window %%d - averaged auc %%0.2f")
+    fig_title = ("ROC of Random Features. "
+            "window %d - sub_window %d - ") % (window, sub_window)
     drawROCcurve(fig_name, mean_fpr, mean_tpr, type, priors, fig_title)
 
 def drawROCcurve(fig_name, mean_fpr, mean_tpr, type, priors,\
@@ -78,7 +78,7 @@ def drawROCcurve(fig_name, mean_fpr, mean_tpr, type, priors,\
     pl.ylim([0.0, 1.0])
     pl.xlabel('False Positive Rate')
     pl.ylabel('True Positive Rate')
-    pl.title(fig_title % overall_auc)
+    pl.title((fig_title + "averaged_AUC %0.2f") % overall_auc)
     pl.savefig(fig_name, format='pdf')
     pl.clf()
 
