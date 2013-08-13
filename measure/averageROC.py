@@ -48,6 +48,12 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
             #mean_tpr[:, type, i] = interp(mean_fpr, fpr, tpr)
             mean_tpr[:, type, i] = f(mean_fpr)
 
+    fig_title = ("ROC of Random Features."
+            "window %%d - sub_window %%d - averaged auc %%0.2f")
+    drawROCcurve(fig_name, mean_fpr, mean_tpr, type, priors, fig_title)
+
+def drawROCcurve(fig_name, mean_fpr, mean_tpr, type, priors,\
+        fig_title="ROC (auc %%0.2f)"):
     mean_tpr[0, :, :] = 0.0
     mean_tpr[-1, :, :] = 1.0
     tpr_list = mean_tpr.tolist()
@@ -72,8 +78,7 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
     pl.ylim([0.0, 1.0])
     pl.xlabel('False Positive Rate')
     pl.ylabel('True Positive Rate')
-    pl.title("ROC of Random Features - window %d - sub_window %d - averaged auc %0.2f" 
-            % (window, sub_window, overall_auc))
+    pl.title(fig_title % overall_auc)
     pl.savefig(fig_name, format='pdf')
     pl.clf()
 
@@ -88,9 +93,9 @@ def experiment(typeString, window, sub_window):
     vertical_averaged_ROC(fold_files, file_name, window, sub_window)
 
 
-windows = [11, 21, 31, 41, 51, 61, 71]
-sub_windows = [3, 5, 7, 9, 13]
-for i in windows:
-    for j in sub_windows:
-        experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
+#windows = [11, 21, 31, 41, 51, 61, 71]
+#sub_windows = [3, 5, 7, 9, 13]
+#for i in windows:
+#    for j in sub_windows:
+#        experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
 #experiment('/home/wyli/shared/experiments/randomfeatures', 21, 13)
