@@ -16,7 +16,7 @@ addpath(genpath('U:/github/texa')); %.git folder slow
 %randFeatureLength = 40;
 
 %%% output directory
-reclassify = 1;
+reclassify = 0;
 if reclassify
 
     generate_scheme = 0;

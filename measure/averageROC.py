@@ -91,4 +91,4 @@ def experiment(typeString, window, sub_window):
 #for i in windows:
 #    for j in sub_windows:
 #        experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
-experiment('/home/wyli/shared/experiments/randomfeatures', 11, 9)
+experiment('/home/wyli/shared/experiments/randomfeatures', 21, 13)

@@ -25,6 +25,8 @@ def calc_roc(result_file, pos):
 def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
     cancer, HGD, LGD = 0, 1, 2
     k = len(fold_path)
+    if k < 10:
+        return # not enough for ten-fold cross validation
 
     all_mat = np.zeros((3, 3))
     for i, p in enumerate(fold_path):
@@ -78,9 +80,9 @@ def experiment(typeString, window, sub_window):
     vertical_averaged_ROC(fold_files, file_name, window, sub_window)
 
 
-#windows = [11, 21, 31, 41, 51, 61, 71]
-#sub_windows = [3, 5, 7, 9, 13]
-#for i in windows:
-#    for j in sub_windows:
-#        experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
-experiment('/home/wyli/shared/experiments/randomfeatures', 11, 9)
+windows = [11, 21, 31, 41, 51, 61, 71]
+sub_windows = [3, 5, 9, 13]
+for i in windows:
+    for j in sub_windows:
+        experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
+#experiment('/home/wyli/shared/experiments/randomfeatures', 21, 13)
