@@ -5,6 +5,12 @@ import platt
 #s = platt.SigmoidPredict(0.5, [a, b])
 #print 
 
+#[a, b] = platt.SigmoidTrain([0.5, 0.6, 0.7], [1, -1, 1])
+#print a, b
+#predictor = platt.PredictorGenerator([a, b])
+#s = predictor(0.5)
+#print s
+
 def calibrate_scores(fold_path, fig_name, window, sub_window):
     cancer, HGD, LGD = [0, 1, 2]
     k = len(fold_path)

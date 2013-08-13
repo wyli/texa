@@ -109,15 +109,15 @@ def SigmoidTrain(deci, label, prior1=None, prior0=None):
 		print "reaching maximal iterations",g1,g2
 	return [A,B]
 
-#reads decision_value and Platt parameter [A,B]
-#outputs predicted probability
-def SigmoidPredict(deci, AB):
-	A, B = AB
-	fApB = deci * A + B
-	if (fApB >= 0):
-		return exp(-fApB)/(1.0+exp(-fApB))
-	else:
-		return 1.0/(1+exp(fApB)) 
-	return prob
-
-
+# reads decision_value and Platt parameter [A,B]
+# outputs predicted probability
+def PredictorGenerator(AB):
+    def SigmoidPredict(deci):
+        A, B = AB
+        fApB = deci * A + B
+        if (fApB >= 0):
+            return exp(-fApB)/(1.0+exp(-fApB))
+        else:
+            return 1.0/(1+exp(fApB)) 
+        return prob
+    return SigmoidPredict
