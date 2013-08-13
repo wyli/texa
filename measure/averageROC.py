@@ -59,10 +59,10 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
         mean_auc = auc(mean_fpr, tpr_v[:,0])
         print mean_auc
         print type
-
         pl.plot(mean_fpr, tpr_v[:,0], lw=1,
                 label="%s (class auc: %0.2f)" % (type, mean_auc))
-        pl.gca().fill_between(mean_fpr, tpr_v[:, 1], tpr_v[:,2], color=colors[i], alpha=0.2)
+        pl.gca().fill_between(mean_fpr, tpr_v[:, 1], tpr_v[:,2],
+                color=colors[i], alpha=0.2)
 
         overall_auc += priors[i] * mean_auc
     overall_auc /= np.sum(priors)
