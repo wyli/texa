@@ -33,7 +33,6 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
     if k < 10:
         return #not enough results
 
-    # ROC curves are functions with fpr as variable
     num_samples = 8000
     mean_fpr = np.linspace(0, 1, num_samples)
     mean_tpr = np.zeros((num_samples, 3, k))
@@ -45,15 +44,15 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
             fpr, tpr, prior = calc_roc(mat_file, type)
             priors[type] += prior
             f = interpolate.interp1d(fpr, tpr)
-            #mean_tpr[:, type, i] = interp(mean_fpr, fpr, tpr)
             mean_tpr[:, type, i] = f(mean_fpr)
 
     fig_title = ("ROC of Random Features. "
             "window %d - sub_window %d - ") % (window, sub_window)
     drawROCcurve(fig_name, mean_fpr, mean_tpr, type, priors, fig_title)
 
-def drawROCcurve(fig_name, mean_fpr, mean_tpr, type, priors,\
-        fig_title="ROC (auc %%0.2f)"):
+def drawROCcurve(fig_name, mean_fpr, mean_tpr, 
+        type, priors, fig_title="ROC - "):
+
     mean_tpr[0, :, :] = 0.0
     mean_tpr[-1, :, :] = 1.0
     tpr_list = mean_tpr.tolist()

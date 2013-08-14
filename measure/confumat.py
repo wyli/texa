@@ -16,7 +16,7 @@ def calc_roc(result_file, pos):
     scores = result_mat['scores']
     labels = result_mat['testY']
     labels = [item-1 for sublist in labels.tolist() for item in sublist]
-    pre = [np.argmax(rows) for rows in scores]
+    pre = np.argmax(scores, axis=1)
     
     for i, j in zip(labels, pre):
         c_mat[i,j] += 1
