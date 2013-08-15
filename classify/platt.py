@@ -20,7 +20,7 @@ def SigmoidTrain(deci, label, prior1=None, prior0=None):
     
     #Parameter Setting
     maxiter=100 #Maximum number of iterations
-    minstep=1e-16   #Minimum step taken in line search
+    minstep=1e-120  #Minimum step taken in line search
     sigma=1e-12 #For numerically strict PD of Hessian
     eps=1e-5
     

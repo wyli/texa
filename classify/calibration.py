@@ -4,6 +4,9 @@ import numpy as np
 import pdb
 import platt
 from measure import confumat
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as pl
 
 def load_validation_set(result_file, type):
     result_mat = scipy.io.loadmat(result_file, struct_as_record=True)
@@ -39,6 +42,10 @@ def calibrate_scores(fold_path, fig_name, window, sub_window):
             prob = [predictor(i) for i in test_scores]
             if probs.size == 0:
                 probs = np.array(prob)
+                pl.hist(probs, bins=100)
+                pl.savefig('/home/wyli/shared/experiments/test.pdf')
+                pl.clf()
+                return
             else:
                 probs = np.vstack([probs, prob])
         probs = np.transpose(probs)
