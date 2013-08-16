@@ -44,6 +44,7 @@ def plot_confumat(all_mat, fig_name):
         for j in i:
             tmp_arr.append(float(j)/float(a))
         norm_conf.append(tmp_arr)
+    plt.clf()
     fig = plt.figure()
     ax = fig.add_subplot(111)
     ax.set_aspect(1)

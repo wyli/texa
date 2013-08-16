@@ -57,6 +57,7 @@ def drawROCcurve(fig_name, mean_fpr, mean_tpr,
     mean_tpr[-1, :, :] = 1.0
     tpr_list = mean_tpr.tolist()
     overall_auc = 0.0
+    pl.clf()
     colors = ['#aaaaff', '#aaffaa', '#ffaaaa']
     for i, type in enumerate(['ICA', 'HGD', 'LGD']):
         tpr_v  = [mean_confidence_interval(row[i]) for row in tpr_list]
