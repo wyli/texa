@@ -58,7 +58,7 @@ else
 end
 
 %%% input patches
-patchSet = 'F:/cuboid_%d';
+patchSet = 'F:/surs/cuboid_%d';
 patchSet = sprintf(patchSet, windowSize);
 xmlSet = 'C:/OPT_dataset/Description';
 

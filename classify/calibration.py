@@ -65,9 +65,9 @@ def experiment(typeString, window, sub_window):
     fold_files = glob.glob(exp_files[0]+'result_*')
     calibrate_scores(fold_files, file_name, window, sub_window)
 
-#windows = [11, 21, 31, 41, 51, 61, 71]
-#sub_windows = [3, 5, 7, 9, 13]
-#for i in windows:
-#    for j in sub_windows:
-#        experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
-#experiment('/home/wyli/shared/experiments/randomfeatures', 21, 13)
+# windows = [11, 21, 31, 41, 51, 61, 71]
+# sub_windows = [3, 5, 7, 9, 13]
+# for i in windows:
+#     for j in sub_windows:
+#         experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
+# experiment('/home/wyli/shared/experiments/randomfeatures', 21, 13)
