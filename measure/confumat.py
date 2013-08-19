@@ -88,5 +88,5 @@ def experiment(typeString, window, sub_window):
 #sub_windows = [3, 5, 9, 13]
 #for i in windows:
 #    for j in sub_windows:
-#        experiment('/home/wyli/shared/experiments/randomfeatures', i, j)
-#experiment('/home/wyli/shared/experiments/randomfeatures', 21, 13)
+#        experiment('/home/wyli/shared/experiments/randomfeatures_surs', i, j)
+#experiment('/home/wyli/shared/experiments/randomfeatures_surs', 21, 13)
