@@ -63,8 +63,7 @@ def drawROCcurve(fig_name, mean_fpr, mean_tpr,
         tpr_v  = [mean_confidence_interval(row[i]) for row in tpr_list]
         tpr_v = np.array(tpr_v)
         mean_auc = auc(mean_fpr, tpr_v[:,0])
-        print mean_auc
-        print type
+        print ("%s, %0.4f") % (type, mean_auc)
         pl.plot(mean_fpr, tpr_v[:,0], lw=1,
                 label="%s (class auc: %0.2f)" % (type, mean_auc))
         pl.gca().fill_between(mean_fpr, tpr_v[:, 1], tpr_v[:,2],
@@ -72,7 +71,7 @@ def drawROCcurve(fig_name, mean_fpr, mean_tpr,
 
         overall_auc += priors[i] * mean_auc
     overall_auc /= np.sum(priors)
-    print overall_auc
+    print ("overall: %0.4f") % overall_auc
     pl.legend(loc="lower right")
     pl.xlim([0.0, 1.0])
     pl.ylim([0.0, 1.0])
