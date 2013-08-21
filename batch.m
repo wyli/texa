@@ -18,7 +18,7 @@
 %main('randomfeatures_surs', 31, 5, 3, 100);
 %main('randomfeatures_surs', 41, 5, 3, 100);
 %main('randomfeatures_surs', 51, 5, 3, 100);
-main('randomfeatures_surs', 61, 5, 3, 100);
+%main('randomfeatures_surs', 61, 5, 3, 100);
 %main('randomfeatures_surs', 71, 5, 3, 100);
 %exit
 %main('randomfeatures_surs', 11, 3, 2, 27);
@@ -28,4 +28,11 @@ main('randomfeatures_surs', 61, 5, 3, 100);
 %main('randomfeatures_surs', 51, 3, 2, 27);
 %main('randomfeatures_surs', 61, 3, 2, 27);
 %main('randomfeatures_surs', 71, 3, 2, 27);
+%
+%
+%
+%
+%
+%main('randomfeatures', 61, 3, 2, 27);
+main('randomfeatures', 71, 5, 3, 100);
 exit
