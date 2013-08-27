@@ -5,13 +5,21 @@
 %main('randomfeatures_surs', 51, 9, 5, 200);
 %main('randomfeatures_surs', 61, 9, 5, 200);
 %main('randomfeatures_surs', 71, 9, 5, 200);
-
+%main('randomfeatures_surs', 81, 9, 5, 200);
+%main('randomfeatures_surs', 91, 9, 5, 200);
+%main('randomfeatures_surs', 101, 9, 5, 200);
+%main('randomfeatures_surs', 111, 9, 5, 200);
+%
 %main('randomfeatures_surs', 21, 13, 7, 80);
 %main('randomfeatures_surs', 31, 13, 7, 200);
 %main('randomfeatures_surs', 41, 13, 7, 200);
 %main('randomfeatures_surs', 51, 13, 7, 200);
 %main('randomfeatures_surs', 61, 13, 7, 200);
 %main('randomfeatures_surs', 71, 13, 7, 200);
+%main('randomfeatures_surs', 81, 13, 7, 200);
+%main('randomfeatures_surs', 91, 13, 7, 200);
+%main('randomfeatures_surs', 101, 13, 7, 200);
+%main('randomfeatures_surs', 111, 13, 7, 200);
 %exit
 %main('randomfeatures_surs', 11, 5, 3, 100);
 %main('randomfeatures_surs', 21, 5, 3, 100);
@@ -20,6 +28,10 @@
 %main('randomfeatures_surs', 51, 5, 3, 100);
 %main('randomfeatures_surs', 61, 5, 3, 100);
 %main('randomfeatures_surs', 71, 5, 3, 100);
+main('randomfeatures_surs', 81, 5, 3, 100);
+main('randomfeatures_surs', 91, 5, 3, 100);
+main('randomfeatures_surs', 101, 5, 3, 100);
+main('randomfeatures_surs', 111, 5, 3, 100);
 %exit
 %main('randomfeatures_surs', 11, 3, 2, 27);
 %main('randomfeatures_surs', 21, 3, 2, 27);
@@ -28,11 +40,13 @@
 %main('randomfeatures_surs', 51, 3, 2, 27);
 %main('randomfeatures_surs', 61, 3, 2, 27);
 %main('randomfeatures_surs', 71, 3, 2, 27);
+main('randomfeatures_surs', 81, 3, 2, 27);
+main('randomfeatures_surs', 91, 3, 2, 27);
+main('randomfeatures_surs', 101, 3, 2, 27);
+main('randomfeatures_surs', 111, 3, 2, 27);
 %
 %
 %
 %
 %
-%main('randomfeatures', 61, 3, 2, 27);
-main('randomfeatures', 71, 5, 3, 100);
 exit
