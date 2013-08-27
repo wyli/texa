@@ -48,7 +48,7 @@ def vertical_averaged_ROC(fold_path, fig_name, window, sub_window):
 
     fig_title = ("ROC of Random Features. "
             "window %d - sub_window %d - ") % (window, sub_window)
-    drawROCcurve(fig_name, mean_fpr, mean_tpr, type, priors, fig_title)
+    return drawROCcurve(fig_name, mean_fpr, mean_tpr, type, priors, fig_title)
 
 def drawROCcurve(fig_name, mean_fpr, mean_tpr, 
         type, priors, fig_title="ROC - "):
@@ -80,6 +80,7 @@ def drawROCcurve(fig_name, mean_fpr, mean_tpr,
     pl.title((fig_title + "averaged_AUC %0.2f") % overall_auc)
     pl.savefig(fig_name, format='pdf')
     pl.clf()
+    return overall_auc
 
 def experiment(typeString, window, sub_window):
     exp_folder = "%s/*_%02d_%02d/" %(typeString, window, sub_window)
@@ -89,7 +90,7 @@ def experiment(typeString, window, sub_window):
     if len(exp_files) == 0:
         return
     fold_files = glob.glob(exp_files[0]+'result_*')
-    vertical_averaged_ROC(fold_files, file_name, window, sub_window)
+    return vertical_averaged_ROC(fold_files, file_name, window, sub_window)
 
 
 #windows = [11, 21, 31, 41, 51, 61, 71]
