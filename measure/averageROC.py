@@ -88,6 +88,7 @@ def experiment(typeString, window, sub_window):
     print file_name
     exp_files = glob.glob(exp_folder)
     if len(exp_files) == 0:
+        print "not correct format" + exp_folder
         return
     fold_files = glob.glob(exp_files[0]+'result_*')
     return vertical_averaged_ROC(fold_files, file_name, window, sub_window)

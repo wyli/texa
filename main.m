@@ -141,7 +141,7 @@ for f = 1:length(testScheme)
         classifyFeatures(files, feaSet, resultSet, trainInd, testInd);
     end
 end
-if draw_fig
+if draw_fig % this will draw auc curves
     avgAUC = AveragedMultiClassAUC([windowSize, subWindow], typeString)
     avgAUC = allScoresROC([windowSize, subWindow], typeString)
 end

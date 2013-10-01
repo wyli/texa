@@ -2,7 +2,7 @@ import measure.averageROC as rc
 import measure.confumat as cf
 import classify.calibration as ca
 
-windows = [11, 21, 31, 41, 51, 61, 71]
+windows = [11, 21, 31, 41, 51, 61, 71, 81, 91, 101, 111]
 sub_window = [3, 5, 9, 13]
 for i in windows:
     for j in sub_window:

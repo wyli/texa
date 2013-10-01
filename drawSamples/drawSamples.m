@@ -17,7 +17,7 @@ mkdir(outputSet);
 
 % parameters
 window3d = windowSize * ones(1,3);
-step3d = step *ones(1,3);
+step3d = step * ones(1,3);
 
 for i = 1:size(xmlFiles, 1)
 

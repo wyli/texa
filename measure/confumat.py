@@ -61,7 +61,9 @@ def plot_confumat(all_mat, fig_name):
                     verticalalignment='center',
                     color='green', fontsize=24)
 
-    print all_mat
+    #print norm_conf
+    overall_conf = norm_conf[0][0] + norm_conf[1][1] + norm_conf[2][2]
+    print ("acc: %.4f") % (overall_conf/3.0)
     cb = fig.colorbar(res)
     classes = 'LHC'
     plt.xticks(range(3), ['ICA', 'HGD', 'LGD'])
